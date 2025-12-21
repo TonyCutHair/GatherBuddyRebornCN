@@ -114,13 +114,13 @@ public readonly struct TimeInterval : IEquatable<TimeInterval>
         {
             > RealTime.MillisecondsPerDay => shortString
                 ? $">{tmp.TotalDays}d"
-                : $"{((float)tmp.Time / RealTime.MillisecondsPerDay).ToString("F2", CultureInfo.InvariantCulture)} Days",
+                : $"{((float)tmp.Time / RealTime.MillisecondsPerDay).ToString("F2", CultureInfo.InvariantCulture)} 天",
             > RealTime.MillisecondsPerHour => shortString
                 ? $">{tmp.TotalHours}h"
-                : $"{tmp.TotalHours:D2}:{tmp.CurrentMinute:D2} Hours",
+                : $"{tmp.TotalHours:D2}:{tmp.CurrentMinute:D2} 小时",
             _ => shortString
                 ? $"{tmp.TotalMinutes}:{tmp.CurrentSecond:D2}m"
-                : $"{tmp.TotalMinutes:D2}:{tmp.CurrentSecond:D2} Minutes",
+                : $"{tmp.TotalMinutes:D2}:{tmp.CurrentSecond:D2} 分钟",
         };
     }
 

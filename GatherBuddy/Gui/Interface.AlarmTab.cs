@@ -244,10 +244,11 @@ public partial class Interface
                 out var newDesc, ref _alarmCache.EditGroupDesc, IconButtonSize, 2 * SetInputWidth, 128))
             _plugin.AlarmManager.ChangeGroupDescription(idx, newDesc);
         var enabled = group.Enabled;
-        if (ImGui.Checkbox("Enabled", ref enabled) && enabled != group.Enabled)
+        if (ImGui.Checkbox(Label("Enabled", "启用"), ref enabled) && enabled != group.Enabled)
             _plugin.AlarmManager.ToggleGroup(idx);
         ImGuiUtil.HoverTooltip(
-            "Enable this alarm group. Only those alarms in the group that are enabled themselves will be counted as active.");
+            Label("Enable this alarm group. Only those alarms in the group that are enabled themselves will be counted as active.",
+            "启用此警报组。只有组中本身已启用的警报才会被计为活动。"));
     }
 
     private void DrawToggleAll(AlarmGroup group)
@@ -257,7 +258,7 @@ public partial class Interface
         ImGui.TableNextColumn();
         var allEnabled = group.Alarms.All(a => a.Enabled);
         var ret        = ImGui.Checkbox("##allEnabled", ref allEnabled);
-        ImGuiUtil.HoverTooltip("Enable all disabled alarms, or disable all alarms.");
+        ImGuiUtil.HoverTooltip(Label("Enable all disabled alarms, or disable all alarms.", "启用所有禁用的警报，或禁用所有警报。"));
 
         if (!ret)
             return;

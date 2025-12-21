@@ -38,7 +38,7 @@ public partial class Interface
             {
                 _globalScale     = ImGuiHelpers.GlobalScale;
                 _nameColumnWidth = (Items.Max(i => TextWidth(i.Data.Name[GatherBuddy.Language])) + ItemSpacing.X + LineIconSize.X) / Scale;
-                _nextUptimeColumnWidth = Math.Max(TextWidth("99:99 Minutes") / Scale,
+                _nextUptimeColumnWidth = Math.Max(TextWidth(Label("99:99 Minutes", "99:99 分钟")) / Scale,
                     TextWidth(_nextUptimeColumn.Label) / Scale + Table.ArrowWidth);
                 _closestAetheryteColumnWidth = GatherBuddy.GameData.Aetherytes.Values.Max(a => TextWidth(a.Name)) / Scale;
                 _levelColumnWidth = Math.Max(TextWidth("99*****") / Scale,
@@ -57,19 +57,19 @@ public partial class Interface
             }
         }
 
-        private static readonly NameColumn        _nameColumn        = new() { Label = "Item Name..." };
-        private static readonly NextUptimeColumn  _nextUptimeColumn  = new() { Label = "Next Uptime" };
-        private static readonly AetheryteColumn   _aetheryteColumn   = new() { Label = "Aetheryte" };
-        private static readonly LevelColumn       _levelColumn       = new() { Label = "Lvl..." };
-        private static readonly JobColumn         _jobColumn         = new() { Label = "Gathering" };
-        private static readonly TypeColumn        _typeColumn        = new() { Label = "Node Type" };
-        private static readonly ExpansionColumn   _expansionColumn   = new() { Label = "Exp." };
-        private static readonly FolkloreColumn    _folkloreColumn    = new() { Label = "Folklore" };
-        private static readonly UptimesColumn     _uptimesColumn     = new() { Label = "Uptimes" };
-        private static readonly BestNodeColumn    _bestNodeColumn    = new() { Label = "Best Node" };
-        private static readonly BestZoneColumn    _bestZoneColumn    = new() { Label = "Best Zone" };
-        private static readonly ItemIdColumn      _itemIdColumn      = new() { Label = "Item Id" };
-        private static readonly GatheringIdColumn _gatheringIdColumn = new() { Label = "G. Id" };
+        private static readonly NameColumn        _nameColumn        = new() { Label = Label("Item Name...", "物品名称...") };
+        private static readonly NextUptimeColumn  _nextUptimeColumn  = new() { Label = Label("Next Uptime", "下次出现") };
+        private static readonly AetheryteColumn   _aetheryteColumn   = new() { Label = Label("Aetheryte", "以太之光") };
+        private static readonly LevelColumn       _levelColumn       = new() { Label = Label("Lvl...", "等级...") };
+        private static readonly JobColumn         _jobColumn         = new() { Label = Label("Gathering", "采集类型") };
+        private static readonly TypeColumn        _typeColumn        = new() { Label = Label("Node Type", "节点类型") };
+        private static readonly ExpansionColumn   _expansionColumn   = new() { Label = Label("Exp.", "版本") };
+        private static readonly FolkloreColumn    _folkloreColumn    = new() { Label = Label("Folklore", "传承录") };
+        private static readonly UptimesColumn     _uptimesColumn     = new() { Label = Label("Uptimes", "出现时间") };
+        private static readonly BestNodeColumn    _bestNodeColumn    = new() { Label = Label("Best Node", "最佳节点") };
+        private static readonly BestZoneColumn    _bestZoneColumn    = new() { Label = Label("Best Zone", "最佳区域") };
+        private static readonly ItemIdColumn      _itemIdColumn      = new() { Label = Label("Item Id", "物品ID") };
+        private static readonly GatheringIdColumn _gatheringIdColumn = new() { Label = Label("G. Id", "采集ID") };
 
         private class ItemFilterColumn : ColumnFlags<ItemFilter, ExtendedGatherable>
         {
@@ -176,7 +176,7 @@ public partial class Interface
                 var aetheryte = item.Uptime.Item1.ClosestAetheryte;
                 if (aetheryte == null)
                 {
-                    ImGui.Text("None");
+                    ImGui.Text(Label("None", "无"));
                     return;
                 }
 

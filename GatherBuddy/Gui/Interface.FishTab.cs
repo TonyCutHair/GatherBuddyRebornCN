@@ -75,20 +75,20 @@ public partial class Interface
             GatherBuddy.FishLog.Change             += OnLogChange;
         }
 
-        private static readonly NameColumn        _nameColumn        = new() { Label = "Item Name..." };
-        private static readonly CaughtColumn      _caughtColumn      = new() { Label = "Log" };
-        private static readonly NextUptimeColumn  _nextUptimeColumn  = new() { Label = "Next Uptime" };
-        private static readonly UptimesColumn     _uptimeColumn      = new() { Label = "Up%" };
-        private static readonly BaitColumn        _baitColumn        = new() { Label = "Bait..." };
-        private static readonly AetheryteColumn   _aetheryteColumn   = new() { Label = "Aetheryte..." };
-        private static readonly TypeColumn        _typeColumn        = new() { Label = "Fish Type" };
-        private static readonly CollectibleColumn _collectibleColumn = new() { Label = "Coll." };
-        private static readonly PatchColumn       _patchColumn       = new() { Label = "Patch" };
-        private static readonly FolkloreColumn    _folkloreColumn    = new() { Label = "Folklore..." };
-        private static readonly BestSpotColumn    _bestSpotColumn    = new() { Label = "Best Spot..." };
-        private static readonly BestZoneColumn    _bestZoneColumn    = new() { Label = "Best Zone..." };
-        private static readonly ItemIdColumn      _itemIdColumn      = new() { Label = "Item Id" };
-        private static readonly FishIdColumn      _fishIdColumn      = new() { Label = "G. Id" };
+        private static readonly NameColumn        _nameColumn        = new() { Label = Label("Item Name...", "物品名称...") };
+        private static readonly CaughtColumn      _caughtColumn      = new() { Label = Label("Log", "记录") };
+        private static readonly NextUptimeColumn  _nextUptimeColumn  = new() { Label = Label("Next Uptime", "下次出现") };
+        private static readonly UptimesColumn     _uptimeColumn      = new() { Label = Label("Up%", "出现率") };
+        private static readonly BaitColumn        _baitColumn        = new() { Label = Label("Bait...", "鱼饵...") };
+        private static readonly AetheryteColumn   _aetheryteColumn   = new() { Label = Label("Aetheryte...", "以太之光...") };
+        private static readonly TypeColumn        _typeColumn        = new() { Label = Label("Fish Type", "鱼类类型") };
+        private static readonly CollectibleColumn _collectibleColumn = new() { Label = Label("Coll.", "收藏") };
+        private static readonly PatchColumn       _patchColumn       = new() { Label = Label("Patch", "版本") };
+        private static readonly FolkloreColumn    _folkloreColumn    = new() { Label = Label("Folklore...", "传承录...") };
+        private static readonly BestSpotColumn    _bestSpotColumn    = new() { Label = Label("Best Spot...", "最佳钓场...") };
+        private static readonly BestZoneColumn    _bestZoneColumn    = new() { Label = Label("Best Zone...", "最佳区域...") };
+        private static readonly ItemIdColumn      _itemIdColumn      = new() { Label = Label("Item Id", "物品ID") };
+        private static readonly FishIdColumn      _fishIdColumn      = new() { Label = Label("G. Id", "采集ID") };
 
         private class FishFilterColumn : ColumnFlags<FishFilter, ExtendedFish>
         {
@@ -316,7 +316,7 @@ public partial class Interface
                 var aetheryte = item.Uptime.Item1.ClosestAetheryte;
                 if (aetheryte == null)
                 {
-                    ImGui.Text("None");
+                    ImGui.Text(Label("None", "无"));
                     return;
                 }
 

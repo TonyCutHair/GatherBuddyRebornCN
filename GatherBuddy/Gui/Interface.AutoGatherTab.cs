@@ -284,14 +284,17 @@ public partial class Interface
             _plugin.AutoGatherListsManager.ChangeDescription(list, newDesc);
 
         var tmp = list.Enabled;
-        if (ImGui.Checkbox("Enabled##list", ref tmp) && tmp != list.Enabled)
+        if (ImGui.Checkbox(Label("Enabled##list", "启用##list"), ref tmp) && tmp != list.Enabled)
             _plugin.AutoGatherListsManager.ToggleList(list);
 
         ImGui.SameLine();
-        ImGuiUtil.Checkbox("Fallback##list",
-            "Items from fallback lists won't be auto-gathered.\n"
+        ImGuiUtil.Checkbox(Label("Fallback##list", "后备##list"),
+            Label("Items from fallback lists won't be auto-gathered.\n"
           + "But if a node doesn't contain any items from regular lists or if you gathered enough of them,\n"
           + "items from fallback lists would be gathered instead if they could be found in that node.",
+          "后备列表中的物品不会被自动采集。\n"
+          + "但如果节点不包含常规列表中的任何物品，或者您已采集足够的数量，\n"
+          + "如果在该节点中能找到后备列表中的物品，则会采集它们。"),
             list.Fallback, (v) => _plugin.AutoGatherListsManager.SetFallback(list, v));
 
         ImGui.Text($"{list.Items.Count} Items in List");
@@ -328,7 +331,7 @@ public partial class Interface
             }
 
             ImGui.SameLine();
-            ImGui.Text("Inventory: ");
+            ImGui.Text(Label("Inventory: ", "库存: "));
             var invTotal = item.GetInventoryCount();
             ImGui.SameLine(0f, ImGui.CalcTextSize($"0000 / ").X - ImGui.CalcTextSize($"{invTotal} / ").X);
             ImGui.Text($"{invTotal} / ");

@@ -265,17 +265,17 @@ public partial class Interface
         DrawLocationInput(group, i, node);
         ImGui.TableNextColumn();
         var length = node.Length();
-        ImGuiUtil.DrawTextButton($"{length} minutes", Vector2.Zero,
+        ImGuiUtil.DrawTextButton(Label($"{length} minutes", $"{length} 分钟"), Vector2.Zero,
             minutes < length ? ColorId.WarningBg.Value() : ImGui.GetColorU32(ImGuiCol.FrameBg));
         if (minutes < length)
-            HoverTooltip($"{length - minutes} minutes are overwritten by overlap with earlier items.");
+            HoverTooltip(Label($"{length - minutes} minutes are overwritten by overlap with earlier items.", $"{length - minutes} 分钟被前面物品的重叠覆盖。"));
 
 
         ImGui.TableNextColumn();
         var annotation = node.Annotation;
         if (_gatherGroupCache.AnnotationEditIdx != i)
         {
-            ImGuiComponents.HelpMarker(annotation.Length > 0 ? annotation : "No annotation. Right-click to edit.");
+            ImGuiComponents.HelpMarker(annotation.Length > 0 ? annotation : Label("No annotation. Right-click to edit.", "无注释。右键编辑。"));
             if (ImGui.IsItemClicked(ImGuiMouseButton.Right))
             {
                 _gatherGroupCache.AnnotationEditIdx = i;
@@ -290,7 +290,7 @@ public partial class Interface
         else
         {
             ImGui.SetNextItemWidth(400 * ImGuiHelpers.GlobalScale);
-            if (ImGui.InputTextWithHint("##annotation", "Annotation...", ref annotation, 256, ImGuiInputTextFlags.EnterReturnsTrue)
+            if (ImGui.InputTextWithHint("##annotation", Label("Annotation...", "注释..."), ref annotation, 256, ImGuiInputTextFlags.EnterReturnsTrue)
              && _plugin.GatherGroupManager.ChangeGroupNode(group, i, null, null, null, annotation, false))
                 _plugin.GatherGroupManager.Save();
             if (annotationEdit == _gatherGroupCache.AnnotationEditIdx && !ImGui.IsItemActive())
@@ -438,7 +438,7 @@ public partial class Interface
 
         var       holdingCtrl = ImGui.GetIO().KeyCtrl;
         using var color       = ImRaii.PushColor(ImGuiCol.ButtonHovered, 0x8000A000, holdingCtrl);
-        if (ImGui.Button("Restore Default Groups") && holdingCtrl && _plugin.GatherGroupManager.SetDefaults(true))
+        if (ImGui.Button(Label("Restore Default Groups", "恢复默认组")) && holdingCtrl && _plugin.GatherGroupManager.SetDefaults(true))
         {
             _gatherGroupCache.Selector.TryRestoreCurrent();
             _plugin.GatherGroupManager.Save();

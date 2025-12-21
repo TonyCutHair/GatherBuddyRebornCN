@@ -224,7 +224,7 @@ public partial class Interface
             "You can use text filters like \"Item Name...\" to only show entries that contain the given string. They are case-insensitive and are not stored for your next session.");
         ImGui.BulletText(
             "Text filters also support regular expressions, e.g. \"(blue|green)\" matches all entries that contain either blue or green.");
-        ImGui.BulletText("Button filters like \"Next Uptime\", \"Node Type\" or \"Fish Type\" allow you to filter specific types on click.");
+        ImGui.BulletText(Interface.Label("Button filters like \"Next Uptime\", \"Node Type\" or \"Fish Type\" allow you to filter specific types on click.", "点击按钮筛选器(如\"下次出现\"、\"节点类型\"或\"鱼类类型\")可以筛选特定类型。"));
         ImGui.BulletText("Those filters are stored across sessions. For columns with active filters, the filter buttons are tinted red.");
         ImGui.NewLine();
         ImGui.BulletText(
@@ -241,7 +241,7 @@ public partial class Interface
         ImGui.BulletText("You can also re-order the tabs themselves, though that is not stored across sessions.");
 
         ImGui.SetCursorPosY(windowSize.Y - ImGui.GetFrameHeight() - ImGui.GetStyle().WindowPadding.Y);
-        if (ImGui.Button("Understood", -Vector2.UnitX))
+        if (ImGui.Button(Interface.Label("Understood", "明白了"), -Vector2.UnitX))
             ImGui.CloseCurrentPopup();
     }
 }

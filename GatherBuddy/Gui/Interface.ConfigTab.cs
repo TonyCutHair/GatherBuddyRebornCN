@@ -478,29 +478,32 @@ public partial class Interface
         public static void DrawPreferredJobSelect()
         {
             var v       = GatherBuddy.Config.PreferredGatheringType;
-            var current = v == GatheringType.Multiple ? "No Preference" : v.ToString();
+            var current = v == GatheringType.Multiple ? Label("No Preference", "无偏好") : (v == GatheringType.Miner ? Label("Miner", "采矿工") : Label("Botanist", "园艺工"));
             ImGui.SetNextItemWidth(SetInputWidth);
-            using var combo = ImRaii.Combo("Preferred Job", current);
+            using var combo = ImRaii.Combo(Label("Preferred Job", "首选职业"), current);
             ImGuiUtil.HoverTooltip(
-                "Choose your job preference when gathering items that can be gathered by miners as well as botanists.\n"
+                Label("Choose your job preference when gathering items that can be gathered by miners as well as botanists.\n"
               + "This effectively turns the regular gather command to /gathermin or /gatherbtn when an item can be gathered by both, "
-              + "ignoring the other options even on successive tries.");
+              + "ignoring the other options even on successive tries.",
+              "选择采集可由采矿工和园艺工共同采集的物品时的职业偏好。\n"
+              + "当物品可由两种职业采集时,这会将常规采集命令转换为 /gathermin 或 /gatherbtn,"
+              + "即使连续尝试也会忽略其他选项。"));
             if (!combo)
                 return;
 
-            if (ImGui.Selectable("No Preference", v == GatheringType.Multiple) && v != GatheringType.Multiple)
+            if (ImGui.Selectable(Label("No Preference", "无偏好"), v == GatheringType.Multiple) && v != GatheringType.Multiple)
             {
                 GatherBuddy.Config.PreferredGatheringType = GatheringType.Multiple;
                 GatherBuddy.Config.Save();
             }
 
-            if (ImGui.Selectable(GatheringType.Miner.ToString(), v == GatheringType.Miner) && v != GatheringType.Miner)
+            if (ImGui.Selectable(Label("Miner", "采矿工"), v == GatheringType.Miner) && v != GatheringType.Miner)
             {
                 GatherBuddy.Config.PreferredGatheringType = GatheringType.Miner;
                 GatherBuddy.Config.Save();
             }
 
-            if (ImGui.Selectable(GatheringType.Botanist.ToString(), v == GatheringType.Botanist) && v != GatheringType.Botanist)
+            if (ImGui.Selectable(Label("Botanist", "园艺工"), v == GatheringType.Botanist) && v != GatheringType.Botanist)
             {
                 GatherBuddy.Config.PreferredGatheringType = GatheringType.Botanist;
                 GatherBuddy.Config.Save();

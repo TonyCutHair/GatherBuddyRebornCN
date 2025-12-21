@@ -254,9 +254,9 @@ public partial class Interface
             var minutes = intuition / RealTime.SecondsPerMinute;
             var seconds = intuition % RealTime.SecondsPerMinute;
             if (seconds == 0)
-                return minutes == 1 ? "Intuition for 1 Minute" : string.Intern($"Intuition for {minutes} Minutes");
+                return minutes == 1 ? Interface.Label("Intuition for 1 Minute", "以小钓大持续1分钟") : string.Intern(Interface.Label($"Intuition for {minutes} Minutes", $"以小钓大持续{minutes}分钟"));
 
-            return string.Intern($"Intuition for {minutes}:{seconds:D2} Minutes");
+            return string.Intern(Interface.Label($"Intuition for {minutes}:{seconds:D2} Minutes", $"以小钓大持续{minutes}:{seconds:D2}分钟"));
         }
 
         public ExtendedFish(Fish data)

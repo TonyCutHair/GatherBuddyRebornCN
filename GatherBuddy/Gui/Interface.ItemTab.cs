@@ -427,7 +427,7 @@ public partial class Interface
     private void DrawItemTab()
     {
         using var id  = ImRaii.PushId("Gatherables");
-        using var tab = ImRaii.TabItem("Gatherables");
+        using var tab = ImRaii.TabItem(Label("Gatherables", "采集品"));
         ImGuiUtil.HoverTooltip("Breaking rocks with a pickaxe or felling trees counts as gathering, why do you ask?\n"
           + "Find all information about botanist and miner items you could ever need.");
         if (!tab)

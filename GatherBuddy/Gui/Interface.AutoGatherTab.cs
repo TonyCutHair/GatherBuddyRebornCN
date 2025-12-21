@@ -394,7 +394,7 @@ public partial class Interface
     private void DrawAutoGatherTab()
     {
         using var id  = ImRaii.PushId("AutoGatherLists");
-        using var tab = ImRaii.TabItem("Auto-Gather");
+        using var tab = ImRaii.TabItem(Label("Auto-Gather", "自动采集"));
 
         ImGuiUtil.HoverTooltip(
             "You read that right! Auto-gather!");

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using Dalamud.Bindings.ImGui;
+using Dalamud.Game;
 using Dalamud.Interface.Windowing;
 using GatherBuddy.Time;
 using Functions = GatherBuddy.Plugin.Functions;
@@ -14,6 +15,15 @@ public partial class Interface : Window, IDisposable
 {
     private const string PluginName = "GatherBuddy Reborn";
     private const float  MinSize    = 700;
+
+    private static bool UseChinese
+        => GatherBuddy.Language == (ClientLanguage)4;
+
+    internal static string Label(string en, string zh)
+        => UseChinese ? zh : en;
+
+    internal static ReadOnlySpan<byte> Label8(ReadOnlySpan<byte> en, ReadOnlySpan<byte> zh)
+        => UseChinese ? zh : en;
 
     private static GatherBuddy _plugin                 = null!;
     private        TimeStamp   _earliestKeyboardToggle = TimeStamp.Epoch;

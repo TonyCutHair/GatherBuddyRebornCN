@@ -767,7 +767,7 @@ public partial class Interface
 
         _records = _plugin.FishRecorder.Records;
         using var id  = ImUtf8.PushId("Fishing Spots Stats"u8);
-        using var tab = ImUtf8.TabItem("Fishing Spots Stats"u8);
+        using var tab = ImUtf8.TabItem(Label8("Fishing Spots Stats"u8, "钓场统计"u8));
         ImUtf8.HoverTooltip("Aggregator of Fish Record data in a presentable format"u8);
 
         if (!tab)

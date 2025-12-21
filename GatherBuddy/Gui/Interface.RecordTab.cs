@@ -619,7 +619,7 @@ public partial class Interface
     private void DrawRecordTab()
     {
         using var id  = ImUtf8.PushId("Fish Records"u8);
-        using var tab = ImUtf8.TabItem("Fish Records"u8);
+        using var tab = ImUtf8.TabItem(Label8("Fish Records"u8, "鱼类记录"u8));
         ImUtf8.HoverTooltip("The records of my fishing prowess have been greatly exaggerated.\n"u8
           + "Find, cleanup and share all data you have collected while fishing."u8);
         if (!tab)

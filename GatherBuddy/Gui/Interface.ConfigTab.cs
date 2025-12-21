@@ -284,18 +284,18 @@ public partial class Interface
         {
             ImGui.SetNextItemWidth(150);
             var tmp = GatherBuddy.Config.AutoGatherConfig.MountUpDistance;
-            if (ImGui.DragFloat("Mount Up Distance", ref tmp, 0.1f, 0.1f, 100f))
+            if (ImGui.DragFloat(Label("Mount Up Distance", "上坐骑距离"), ref tmp, 0.1f, 0.1f, 100f))
             {
                 GatherBuddy.Config.AutoGatherConfig.MountUpDistance = tmp;
                 GatherBuddy.Config.Save();
             }
 
-            ImGuiUtil.HoverTooltip("The distance at which you will mount up to move to a node.");
+            ImGuiUtil.HoverTooltip(Label("The distance at which you will mount up to move to a node.", "移动到节点时上坐骑的距离。"));
         }
 
         public static void DrawMoveWhileMounting()
-            => DrawCheckbox("Move while mounting up",
-                "Begin pathfinding to the next node while summoning a mount",
+            => DrawCheckbox(Label("Move while mounting up", "上坐骑时移动"),
+                Label("Begin pathfinding to the next node while summoning a mount", "召唤坐骑时开始寻路到下一个节点"),
                 GatherBuddy.Config.AutoGatherConfig.MoveWhileMounting,
                 b => GatherBuddy.Config.AutoGatherConfig.MoveWhileMounting = b);
 
@@ -303,21 +303,21 @@ public partial class Interface
         {
             ImGui.SetNextItemWidth(150);
             var tmp = GatherBuddy.Config.AutoGatherConfig.NavResetCooldown;
-            if (ImGui.DragFloat("Anti-Stuck Cooldown", ref tmp, 0.1f, 0.1f, 10f))
+            if (ImGui.DragFloat(Label("Anti-Stuck Cooldown", "防卡死冷却"), ref tmp, 0.1f, 0.1f, 10f))
             {
                 GatherBuddy.Config.AutoGatherConfig.NavResetCooldown = tmp;
                 GatherBuddy.Config.Save();
             }
 
-            ImGuiUtil.HoverTooltip("The time in seconds before the navigation system will reset if you are stuck.");
+            ImGuiUtil.HoverTooltip(Label("The time in seconds before the navigation system will reset if you are stuck.", "卡死时导航系统重置前的秒数。"));
         }
 
         public static void DrawForceWalkingBox()
-            => DrawCheckbox("Force Walking",                      "Force walking to nodes instead of using mounts.",
+            => DrawCheckbox(Label("Force Walking", "强制步行"), Label("Force walking to nodes instead of using mounts.", "强制步行到节点而不使用坐骑。"),
                 GatherBuddy.Config.AutoGatherConfig.ForceWalking, b => GatherBuddy.Config.AutoGatherConfig.ForceWalking = b);
 
         public static void DrawUseNavigationBox()
-            => DrawCheckbox("Use vnavmesh Navigation",             "Use vnavmesh Navigation to move your character automatically",
+            => DrawCheckbox(Label("Use vnavmesh Navigation", "使用vnavmesh导航"), Label("Use vnavmesh Navigation to move your character automatically", "使用vnavmesh导航自动移动角色"),
                 GatherBuddy.Config.AutoGatherConfig.UseNavigation, b => GatherBuddy.Config.AutoGatherConfig.UseNavigation = b);
 
         public static void DrawStuckThreshold()
@@ -525,7 +525,7 @@ public partial class Interface
 
         // Alarms
         public static void DrawAlarmToggle()
-            => DrawCheckbox(Label("Enable Alarms", "启用警报"), Label("Toggle all alarms on or off.", "切换所有警报的开关。"), GatherBuddy.Config.AlarmsEnabled,
+            => DrawCheckbox(Label("Enable Alarms", "启用闹钟"), Label("Toggle all alarms on or off.", "切换所有闹钟的开关。"), GatherBuddy.Config.AlarmsEnabled,
                 b =>
                 {
                     if (b)
@@ -537,13 +537,13 @@ public partial class Interface
         private static bool _gatherDebug = false;
 
         public static void DrawAlarmsInDutyToggle()
-            => DrawCheckbox(Label("Enable Alarms in Duty", "在副本中启用警报"),
-                Label("Set whether alarms should trigger while you are bound by a duty.", "设置在副本中警报是否触发。"),
+            => DrawCheckbox(Label("Enable Alarms in Duty", "在副本中启用闹钟"),
+                Label("Set whether alarms should trigger while you are bound by a duty.", "设置在副本中闹钟是否触发。"),
                 GatherBuddy.Config.AlarmsInDuty,     b => GatherBuddy.Config.AlarmsInDuty = b);
 
         public static void DrawAlarmsOnlyWhenLoggedInToggle()
-            => DrawCheckbox(Label("Enable Alarms Only In-Game", "仅在游戏内启用警报"),
-                Label("Set whether alarms should trigger while you are not logged into any character.", "设置未登录任何角色时警报是否触发。"),
+            => DrawCheckbox(Label("Enable Alarms Only In-Game", "仅在游戏内启用闹钟"),
+                Label("Set whether alarms should trigger while you are not logged into any character.", "设置未登录任何角色时闹钟是否触发。"),
                 GatherBuddy.Config.AlarmsOnlyWhenLoggedIn, b => GatherBuddy.Config.AlarmsOnlyWhenLoggedIn = b);
 
         private static void DrawAlarmPicker(string label, string description, Sounds current, Action<Sounds> setter)
@@ -1328,7 +1328,7 @@ public partial class Interface
                 ImGui.TreePop();
             }
 
-            if (ImGui.TreeNodeEx(Label("Alarms", "警报")))
+            if (ImGui.TreeNodeEx(Label("Alarms", "闹钟")))
             {
                 ConfigFunctions.DrawAlarmToggle();
                 ConfigFunctions.DrawAlarmsInDutyToggle();

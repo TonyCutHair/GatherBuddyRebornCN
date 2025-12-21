@@ -33,7 +33,7 @@ public partial class Interface
             return;
 
         var current = _alarmCache.Selector.EnsureCurrent();
-        if (ImGui.Selectable(Label("Add to Alarm Preset", "添加到警报预设")))
+        if (ImGui.Selectable(Label("Add to Alarm Preset", "添加到闹钟预设")))
         {
             if (current == null)
             {
@@ -54,7 +54,7 @@ public partial class Interface
         if (ImGui.IsItemHovered())
             ImGui.SetTooltip(Label(
                 $"Add {item.Name[GatherBuddy.Language]} to {(current == null ? "a new alarm preset." : CheckUnnamed(current.Name))}",
-                $"将{item.Name[GatherBuddy.Language]}添加到{(current == null ? "新的警报预设" : CheckUnnamed(current.Name))}"));
+                $"将{item.Name[GatherBuddy.Language]}添加到{(current == null ? "新的闹钟预设" : CheckUnnamed(current.Name))}"));
     }
 
     private void DrawAddToGatherGroup(IGatherable item)

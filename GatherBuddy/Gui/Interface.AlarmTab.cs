@@ -248,7 +248,7 @@ public partial class Interface
             _plugin.AlarmManager.ToggleGroup(idx);
         ImGuiUtil.HoverTooltip(
             Label("Enable this alarm group. Only those alarms in the group that are enabled themselves will be counted as active.",
-            "启用此警报组。只有组中本身已启用的警报才会被计为活动。"));
+            "启用此闹钟组。只有组中本身已启用的闹钟才会被计为活动。"));
     }
 
     private void DrawToggleAll(AlarmGroup group)
@@ -258,7 +258,7 @@ public partial class Interface
         ImGui.TableNextColumn();
         var allEnabled = group.Alarms.All(a => a.Enabled);
         var ret        = ImGui.Checkbox("##allEnabled", ref allEnabled);
-        ImGuiUtil.HoverTooltip(Label("Enable all disabled alarms, or disable all alarms.", "启用所有禁用的警报，或禁用所有警报。"));
+        ImGuiUtil.HoverTooltip(Label("Enable all disabled alarms, or disable all alarms.", "启用所有禁用的闹钟，或禁用所有闹钟。"));
 
         if (!ret)
             return;
@@ -351,7 +351,7 @@ public partial class Interface
     private void DrawAlarmTab()
     {
         using var id  = ImRaii.PushId("Alarms");
-        using var tab = ImRaii.TabItem(Label("Alarms", "警报"));
+        using var tab = ImRaii.TabItem(Label("Alarms", "闹钟"));
         ImGuiUtil.HoverTooltip("Do you often find yourself late for a very important date with no time to say hello or goodbye?\n"
           + "Set up your very own alarm clock. Viera might even be able to wear it around their neck.");
         if (!tab)

@@ -33,10 +33,10 @@ jobs:
           Expand-Archive -Force latest.zip "$env:AppData\XIVLauncher\addon\Hooks\dev"
 
       - name: Restore Nuget Packages
-        run: dotnet restore Gatherbuddy/Gatherbuddy.csproj
+        run: dotnet restore GatherBuddy/GatherBuddy.csproj
 
       - name: Build Plugin
-        run: dotnet build --no-restore -c Release Gatherbuddy/Gatherbuddy.csproj -p:AssemblyVersion=${{ env.tag }} -p:FileVersion=${{ env.tag }} -p:PackageVersion=${{ env.tag }} -p:InformationalVersion=${{ env.tag }} --output .\build
+        run: dotnet build --no-restore -c Release GatherBuddy/GatherBuddy.csproj -p:AssemblyVersion=${{ env.tag }} -p:FileVersion=${{ env.tag }} -p:PackageVersion=${{ env.tag }} -p:InformationalVersion=${{ env.tag }} --output .\build
 
       - name: Zip Plugin
         run: Compress-Archive -Path .\build\* -DestinationPath .\build\GatherbuddyReborn.zip

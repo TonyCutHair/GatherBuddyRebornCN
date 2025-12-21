@@ -22,6 +22,7 @@ public partial class FishingParser
                 ClientLanguage.German   => German.Value,
                 ClientLanguage.French   => French.Value,
                 ClientLanguage.Japanese => Japanese.Value,
+                (ClientLanguage)4       => Chinese.Value,
                 _                       => throw new InvalidEnumArgumentException(),
             };
         }
@@ -47,10 +48,10 @@ public partial class FishingParser
 
         private static readonly Lazy<Regexes> French = new(() => new Regexes
         {
-            Cast           = new Regex(@".*? commencez? � p�cher\.\s*Point de p�che: (?<FishingSpot>.+)\.",        RegexOptions.Compiled | RegexOptions.NonBacktracking | RegexOptions.ExplicitCapture),
-            AreaDiscovered = new Regex(@"Vous notez le banc de poissons �(?<FishingSpot>.+)� dans votre carnet\.", RegexOptions.Compiled | RegexOptions.NonBacktracking | RegexOptions.ExplicitCapture),
-            Mooch          = new Regex(@"essa[^\s]+ de p�cher au vif avec",                                        RegexOptions.Compiled | RegexOptions.NonBacktracking | RegexOptions.ExplicitCapture),
-            Undiscovered   = "Zone de p�che inconnue",
+            Cast           = new Regex(@".*? commencez? � p�cher\.\s*Point de p�che: (?<FishingSpot>.+)\.",        RegexOptions.Compiled | RegexOptions.NonBacktracking | RegexOptions.ExplicitCapture),
+            AreaDiscovered = new Regex(@"Vous notez le banc de poissons �(?<FishingSpot>.+)� dans votre carnet\.", RegexOptions.Compiled | RegexOptions.NonBacktracking | RegexOptions.ExplicitCapture),
+            Mooch          = new Regex(@"essa[^\s]+ de p�cher au vif avec",                                        RegexOptions.Compiled | RegexOptions.NonBacktracking | RegexOptions.ExplicitCapture),
+            Undiscovered   = "Zone de p�che inconnue",
         });
 
         private static readonly Lazy<Regexes> Japanese = new(() => new Regexes
@@ -59,6 +60,14 @@ public partial class FishingParser
             AreaDiscovered = new Regex(@"????????????(?<FishingSpot>.+)?????????!", RegexOptions.Compiled | RegexOptions.NonBacktracking | RegexOptions.ExplicitCapture),
             Mooch          = new Regex(@"??????.+???????????????????",            RegexOptions.Compiled | RegexOptions.NonBacktracking | RegexOptions.ExplicitCapture),
             Undiscovered   = "??????",
+        });
+
+        private static readonly Lazy<Regexes> Chinese = new(() => new Regexes
+        {
+            Cast           = new Regex(@"(?:你在|.*?在)(?<FishingSpot>.+?)(?:垂钓|开始钓鱼)\。", RegexOptions.Compiled | RegexOptions.NonBacktracking | RegexOptions.ExplicitCapture),
+            AreaDiscovered = new Regex(@"(?<FishingSpot>.+?)已添加至钓鱼笔记\。", RegexOptions.Compiled | RegexOptions.NonBacktracking | RegexOptions.ExplicitCapture),
+            Mooch          = new Regex(@"钓竿上仍有鱼儿", RegexOptions.Compiled | RegexOptions.NonBacktracking | RegexOptions.ExplicitCapture),
+            Undiscovered   = "未知的钓鱼点",
         });
         // @formatter:on
     }

@@ -387,7 +387,7 @@ public partial class Interface
             public TypeColumn()
             {
                 SetFlags(FishFilter.SmallFish, FishFilter.BigFish, FishFilter.Spearfishing, FishFilter.OceanFish);
-                SetNames("Regular Fish", "Big Fish", "Spearfishing", "Oceanfishing");
+                SetNames("普通鱼", "大型鱼", "刺鱼", "海钓");
             }
 
             public override void DrawColumn(ExtendedFish item, int _)
@@ -601,9 +601,9 @@ public partial class Interface
     {
         using var id  = ImRaii.PushId("Fish");
         using var tab = ImRaii.TabItem(Label("Fish", "鱼类"));
-        ImGuiUtil.HoverTooltip("There are plenty of fish in the sea. And the air. And the sand. And the lava. And space, for some reason.\n"
-          + " Gotta catch'em all!\n"
-          + "Enough information about fish to get you started, and for everything else there's TeamCraft!");
+        ImGuiUtil.HoverTooltip("海里有很多鱼。还有空中、沙中、岩浆中，不知为何还有外太空。\n"
+          + "全部抓个干净！\n"
+          + "关于鱼的足够信息可以让你入门，其他一切都有TeamCraft！");
         if (!tab)
             return;
 

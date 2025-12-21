@@ -18,7 +18,7 @@ public partial class Interface
 {
     internal static bool DrawLocationInput(IGatherable item, ILocation? current, out ILocation? ret)
     {
-        const string noPreferred = "No Preferred Location";
+        const string noPreferred = "无偏好地点";
         var          width       = SetInputWidth * 0.85f;
         ret = current;
         if (item.Locations.Count() == 1)
@@ -207,8 +207,8 @@ public partial class Interface
             GatherBuddy.Config.Save();
         }
 
-        ImGuiUtil.HoverTooltip("Click for some help navigating this table.\n"
-          + "Control + Shift + Right-Click to permanently hide this button.");
+        ImGuiUtil.HoverTooltip("点击获取导航此表格的帮助。\n"
+          + "Ctrl + Shift + 右键永久隐藏此按钮。");
 
         color.Pop();
         var windowSize = new Vector2(1024 * ImGuiHelpers.GlobalScale,

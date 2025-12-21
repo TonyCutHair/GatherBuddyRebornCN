@@ -591,8 +591,8 @@ namespace GatherBuddy.Gui
                             selector.Save();
 
                         ImGui.SameLine();
-                        if (ImGuiUtil.Checkbox($"Always use {ConcatNames(Actions.SolidAge)}",
-                                $"Use {ConcatNames(Actions.SolidAge)} regardless of starting GP if the target collectability score is reached",
+                        if (ImGuiUtil.Checkbox($"总是使用 {ConcatNames(Actions.SolidAge)}",
+                                $"如果达到目标收藏价值，无论初始GP如何都使用 {ConcatNames(Actions.SolidAge)}",
                                 preset.CollectableAlwaysUseSolidAge,
                                 x => preset.CollectableAlwaysUseSolidAge = x))
                             selector.Save();

@@ -62,7 +62,7 @@ namespace GatherBuddy.AutoGather
 
         private unsafe void ReduceItems(bool reduceAll, Action? onComplete = null)
         {
-            AutoStatus = "Aetherial reduction";
+            AutoStatus = "以太精炼中";
             var delay = (int)GatherBuddy.Config.AutoGatherConfig.ExecutionDelay;
             TaskManager.Enqueue(StopNavigation);
             if (PurifyItemSelectorAddon == null)

@@ -233,7 +233,7 @@ public class Executor
 
         if (set.Length == 0)
         {
-            Communicator.PrintError("No gear set for ", _location.GatheringType.ToString(), GatherBuddy.Config.SeColorArguments,
+            Communicator.PrintError("No gear set for ", _location.GatheringType.ToName(), GatherBuddy.Config.SeColorArguments,
                 " configured.");
             return;
         }

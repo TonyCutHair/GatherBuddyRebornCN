@@ -100,4 +100,22 @@ public static class GatheringTypeExtension
             _                      => throw new ArgumentOutOfRangeException(nameof(type), type, null),
         };
     }
+
+    public static string ToName(this GatheringType type)
+    {
+        return type switch
+        {
+            GatheringType.Mining       => "挖掘",
+            GatheringType.Quarrying    => "碎石",
+            GatheringType.Logging      => "伐木",
+            GatheringType.Harvesting   => "割草",
+            GatheringType.Spearfishing => "刺鱼",
+            GatheringType.Botanist     => "园艺工",
+            GatheringType.Miner        => "采矿工",
+            GatheringType.Fisher       => "捕鱼人",
+            GatheringType.Multiple     => "多种",
+            GatheringType.Unknown      => "未知",
+            _                          => type.ToString(),
+        };
+    }
 }

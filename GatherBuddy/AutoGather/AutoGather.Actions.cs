@@ -430,7 +430,7 @@ namespace GatherBuddy.AutoGather
                                         ActionSequence = task.Result.GetEnumerator();
                                     return task.IsCompleted;
                                 });
-                                AutoStatus = "Calculating best action sequence...";
+                                AutoStatus = "计算最佳技能序列...";
                                 return;
                             }
                         }

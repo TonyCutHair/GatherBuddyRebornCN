@@ -154,8 +154,8 @@ public partial class Interface
 
         if (GatherBuddy.AutoGather.ArtisanExporter.ArtisanAssemblyEnabled)
         {
-            if (ImGuiUtil.DrawDisabledButton("Import From Artisan", Vector2.Zero,
-                    "Import your lists from Artisan into GBR\nBrings up a dropdown to select which list to import.\nA new list will be created in GBR when you click on the name of the list in the dropdown.",
+            if (ImGuiUtil.DrawDisabledButton("从Artisan导入", Vector2.Zero,
+                    "将Artisan中的列表导入到GBR\n弹出下拉菜单选择要导入的列表。\n点击列表名称时将在GBR中创建新列表。",
                     !GatherBuddy.AutoGather.ArtisanExporter.ArtisanAssemblyEnabled))
             {
                 ImGui.OpenPopup($"artisanImport");
@@ -191,7 +191,7 @@ public partial class Interface
             }
         }
 
-        if (ImGuiUtil.DrawDisabledButton("Import from TeamCraft", Vector2.Zero, "Populate list from clipboard contents (TeamCraft format)",
+        if (ImGuiUtil.DrawDisabledButton("从TeamCraft导入", Vector2.Zero, "从剪贴板内容填充列表（TeamCraft格式）",
                 _autoGatherListsCache.Selector.Selected == null))
         {
             var clipboardText = ImGuiUtil.GetClipboardText();
@@ -297,7 +297,7 @@ public partial class Interface
           + "如果在该节点中能找到后备列表中的物品，则会采集它们。"),
             list.Fallback, (v) => _plugin.AutoGatherListsManager.SetFallback(list, v));
 
-        ImGui.Text($"{list.Items.Count} Items in List");
+        ImGui.Text($"列表中有 {list.Items.Count} 个物品");
         ImGui.NewLine();
         ImGui.SetCursorPosX(ImGui.GetCursorPosX() - ImGui.GetStyle().ItemInnerSpacing.X);
         using var box = ImRaii.ListBox("##gatherWindowList", new Vector2(-1.5f * ImGui.GetStyle().ItemSpacing.X, -1));

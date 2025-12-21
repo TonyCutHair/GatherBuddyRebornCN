@@ -136,7 +136,7 @@ namespace GatherBuddy.AutoGather
 
                 if (!value)
                 {
-                    AutoStatus = "Idle...";
+                    AutoStatus = "空闲...";
                     TaskManager.Abort();
                     YesAlready.Unlock();
 
@@ -402,14 +402,14 @@ namespace GatherBuddy.AutoGather
             if (DiscipleOfLand.NextTreasureMapAllowance == DateTime.MinValue)
             {
                 //Wait for timer refresh
-                AutoStatus = "Refreshing timers...";
+                AutoStatus = "刷新计时器...";
                 DiscipleOfLand.RefreshNextTreasureMapAllowance();
                 return;
             }
 
             if (!CanAct && !_diademQueuingInProgress)
             {
-                AutoStatus = Dalamud.Conditions[ConditionFlag.Gathering] ? "Gathering..." : "Player is busy...";
+                AutoStatus = Dalamud.Conditions[ConditionFlag.Gathering] ? "采集中..." : "玩家忙碌中...";
                 return;
             }
 
@@ -490,7 +490,7 @@ namespace GatherBuddy.AutoGather
                 if (!GatherBuddy.Config.AutoGatherConfig.DoGathering)
                     return;
 
-                AutoStatus = "Gathering...";
+                AutoStatus = "采集中...";
                 StopNavigation();
 
                 var fish = _activeItemList.GetNextOrDefault(new List<uint>()).Where(g => g.Fish != null);
@@ -529,7 +529,7 @@ namespace GatherBuddy.AutoGather
                         if (unstuckResult == AdvancedUnstuckCheckResult.Fail)
                         {
                             StopNavigation();
-                            AutoStatus = "Advanced unstuck in progress!";
+                            AutoStatus = "高级解卡进行中！";
                             return;
                         }
                         DoFishMovement(fish);
@@ -607,13 +607,13 @@ namespace GatherBuddy.AutoGather
                 case AdvancedUnstuckCheckResult.Wait: return;
                 case AdvancedUnstuckCheckResult.Fail:
                     StopNavigation();
-                    AutoStatus = $"Advanced unstuck in progress!";
+                    AutoStatus = $"高级解卡进行中！";
                     return;
             }
 
             if (isPathGenerating)
             {
-                AutoStatus = "Generating path...";
+                AutoStatus = "生成路径中...";
                 return;
             }
 
@@ -735,7 +735,7 @@ namespace GatherBuddy.AutoGather
                         
                         if (!isUmbralWeather)
                         {
-                            AutoStatus = "Waiting in Diadem for umbral weather...";
+                            AutoStatus = "在云海等待灵风天气...";
                             if (!Waiting)
                             {
                                 Waiting = true;
@@ -755,7 +755,7 @@ namespace GatherBuddy.AutoGather
                         {
                             var syntheticTarget = new GatherTarget(firstUmbralItem.Item, diademNode, Time.TimeInterval.Always, firstUmbralItem.Quantity);
                             next = new[] { syntheticTarget }.OrderByDescending(nodes => nodes.Item.ItemId);
-                            AutoStatus = "Traveling to Diadem for umbral items...";
+                            AutoStatus = "前往云海采集灵风物品...";
                         }
                     }
                 }
@@ -808,7 +808,7 @@ namespace GatherBuddy.AutoGather
                         _plugin.Ipc.AutoGatherWaiting();
                     }
 
-                    AutoStatus = "No available items to gather";
+                    AutoStatus = "没有可采集的物品";
                     return;
                 }
             }
@@ -827,7 +827,7 @@ namespace GatherBuddy.AutoGather
 
             if (!GatherBuddy.Config.AutoGatherConfig.UseNavigation)
             {
-                AutoStatus = "Waiting for Gathering Point... (No Nav Mode)";
+                AutoStatus = "等待采集点... (无导航模式)";
                 return;
             }
 
@@ -845,11 +845,11 @@ namespace GatherBuddy.AutoGather
                 {
                     if (Dalamud.Conditions[ConditionFlag.Gathering])
                     {
-                        AutoStatus = "Closing gathering window before teleport...";
+                        AutoStatus = "传送前关闭采集窗口...";
                         CloseGatheringAddons();
                         return;
                     }
-                    AutoStatus = "Using aethernet...";
+                    AutoStatus = "使用以太之光...";
                     StopNavigation();
                     string name = string.Empty;
                     var territorySheet = Dalamud.GameData.GetExcelSheet<TerritoryType>();
@@ -900,19 +900,19 @@ namespace GatherBuddy.AutoGather
                                 AutoHook.SetPluginState?.Invoke(false);
                                 AutoHook.SetAutoStartFishing?.Invoke(false);
                             }
-                            AutoStatus = "Closing fishing before teleport...";
+                            AutoStatus = "传送前停止钓鱼...";
                             QueueQuitFishingTasks();
                             return;
                         }
                         
                         if (Dalamud.Conditions[ConditionFlag.Gathering])
                         {
-                            AutoStatus = "Closing gathering window before teleport...";
+                            AutoStatus = "传送前关闭采集窗口...";
                             CloseGatheringAddons();
                             return;
                         }
                         
-                        AutoStatus = "Teleporting to housing ward...";
+                        AutoStatus = "传送至住宅区...";
                         StopNavigation();
                         
                         string wardCommand = targetTerritoryId switch
@@ -947,7 +947,7 @@ namespace GatherBuddy.AutoGather
                 {
                     if (aetheryte.Position.DistanceToPlayer() > 10)
                     {
-                        AutoStatus = "Moving to aetheryte...";
+                        AutoStatus = "移动到以太之光...";
                         if (!isPathing && !isPathGenerating)
                             Navigate(aetheryte.Position, false);
                     }
@@ -955,11 +955,11 @@ namespace GatherBuddy.AutoGather
                     {
                         if (Dalamud.Conditions[ConditionFlag.Gathering])
                         {
-                            AutoStatus = "Closing gathering window before teleport...";
+                            AutoStatus = "传送前关闭采集窗口...";
                             CloseGatheringAddons();
                             return;
                         }
-                        AutoStatus = "Teleporting...";
+                        AutoStatus = "传送中...";
                         StopNavigation();
                         string name = string.Empty;
                         switch (territoryId)
@@ -1009,7 +1009,7 @@ namespace GatherBuddy.AutoGather
                 GatherBuddy.Log.Verbose($"Addons: {selectStringAddon}, {talkAddon}, {selectYesNoAddon}, {contentsFinderConfirmAddon}");
                 if (dutyNpc != null && dutyNpc.Position.DistanceToPlayer() > 3)
                 {
-                    AutoStatus = "Moving to Diadem NPC...";
+                    AutoStatus = "移动到云海NPC...";
                     var point = VNavmesh.Query.Mesh.NearestPoint(dutyNpc.Position, 10, 10000);
                     if (CurrentDestination != point || (!isPathing && !isPathGenerating))
                     {
@@ -1074,16 +1074,16 @@ namespace GatherBuddy.AutoGather
             {
                 var needsLifestream = territoryId == 478 || territoryId == 129 || territoryId == 128 || territoryId == 132 || territoryId == 133 || territoryId == 130 || territoryId == 131;
                 if (needsLifestream && !Lifestream.Enabled)
-                    AutoStatus = $"Install Lifestream or teleport to {next.First().Location.Territory.Name} manually";
+                    AutoStatus = $"安装Lifestream或手动传送至 {next.First().Location.Territory.Name}";
                 else
-                    AutoStatus = "Manual teleporting required";
+                    AutoStatus = "需要手动传送";
                 return;
             }
             
             var housingWardTerritoriesCheck = new uint[] { 339, 340, 341, 649, 641 };
             if (housingWardTerritoriesCheck.Contains((uint)targetTerritoryId) && !Lifestream.Enabled)
             {
-                AutoStatus = "Install Lifestream to access housing wards";
+                AutoStatus = "安装Lifestream以访问住宅区";
                 return;
             }
 
@@ -1165,7 +1165,7 @@ namespace GatherBuddy.AutoGather
                 
                 if (Dalamud.Conditions[ConditionFlag.BoundByDuty] && !Functions.InTheDiadem())
                 {
-                    AutoStatus = "Can not teleport when bound by duty";
+                    AutoStatus = "受任务约束时无法传送";
                     return;
                 }
                 else if (Functions.InTheDiadem())
@@ -1181,7 +1181,7 @@ namespace GatherBuddy.AutoGather
                         // We're waiting for umbral weather - don't leave due to territory mismatch
                         // Also reset session flag in case it wasn't reset in DoNodeMovementDiadem
                         _hasGatheredUmbralThisSession = false;
-                        AutoStatus = "Waiting in Diadem for next umbral weather...";
+                        AutoStatus = "在云海中等待下一个灵风天气...";
                         return;
                     }
                     else
@@ -1199,23 +1199,23 @@ namespace GatherBuddy.AutoGather
              || Dalamud.Conditions[ConditionFlag.Mounting]
              || Dalamud.Conditions[ConditionFlag.Mounting71])
             {
-                AutoStatus = "Waiting for current action to complete before teleport...";
+                AutoStatus = "等待当前动作完成后传送...";
                 return;
             }
 
             if (TaskManager.IsBusy)
             {
-                AutoStatus = "Waiting for current tasks to complete before teleport...";
+                AutoStatus = "等待当前任务完成后传送...";
                 return;
             }
 
             if (Environment.TickCount64 - _lastNodeInteractionTime < 5000)
             {
-                AutoStatus = "Waiting after recent node interaction before teleport...";
+                AutoStatus = "节点交互后等待传送...";
                 return;
             }
 
-            AutoStatus = "Teleporting...";
+            AutoStatus = "传送中...";
             StopNavigation();
 
             if (!MoveToTerritory(next.First().Location))
@@ -1285,7 +1285,7 @@ namespace GatherBuddy.AutoGather
                 return;
             }
 
-            AutoStatus = "Fell out of control loop unexpectedly. Please report this error.";
+            AutoStatus = "意外退出控制循环。请报告此错误。";
             return;
         }
 
@@ -1325,12 +1325,12 @@ namespace GatherBuddy.AutoGather
                                 AutoHook.SetPluginState?.Invoke(false);
                                 AutoHook.SetAutoStartFishing?.Invoke(false);
                             }
-                            AutoStatus = "Closing fishing before teleport...";
+                            AutoStatus = "传送前结束钓鱼...";
                             QueueQuitFishingTasks();
                             return;
                         }
                         
-                        AutoStatus = "Teleporting to housing ward...";
+                        AutoStatus = "传送到住宅区...";
                         StopNavigation();
                         
                         string wardCommand = targetFishTerritoryId switch
@@ -1363,7 +1363,7 @@ namespace GatherBuddy.AutoGather
                 {
                     if (aetheryte.Position.DistanceToPlayer() > 10)
                     {
-                        AutoStatus = "Moving to aetheryte...";
+                        AutoStatus = "移动到以太之光...";
                         if (!isPathing && !isPathGenerating)
                             Navigate(aetheryte.Position, false);
                     }
@@ -1376,11 +1376,11 @@ namespace GatherBuddy.AutoGather
                             AutoHook.SetPluginState?.Invoke(false);
                             AutoHook.SetAutoStartFishing?.Invoke(false);
                         }
-                        AutoStatus = "Closing fishing before teleport...";
+                        AutoStatus = "传送前结束钓鱼...";
                         QueueQuitFishingTasks();
                         return;
                     }
-                        AutoStatus = "Teleporting...";
+                        AutoStatus = "传送中...";
                         StopNavigation();
                         string name = Dalamud.GameData.GetExcelSheet<TerritoryType>().GetRow(886).PlaceName.Value.Name.ToString()
                             .Split(" ")[1];
@@ -1398,7 +1398,7 @@ namespace GatherBuddy.AutoGather
             {
                 if (Dalamud.Conditions[ConditionFlag.BoundByDuty] && !Functions.InTheDiadem())
                 {
-                    AutoStatus = "Can not teleport when bound by duty";
+                    AutoStatus = "任务中无法传送";
                     return;
                 }
                 else if (Functions.InTheDiadem())
@@ -1430,7 +1430,7 @@ namespace GatherBuddy.AutoGather
                     
                     if (dutyNpc != null && dutyNpc.Position.DistanceToPlayer() > 3)
                     {
-                        AutoStatus = "Moving to Diadem NPC...";
+                        AutoStatus = "移动到云海NPC...";
                         var point = VNavmesh.Query.Mesh.NearestPoint(dutyNpc.Position, 10, 10000);
                         if (CurrentDestination != point || (!IsPathGenerating && !IsPathing))
                         {
@@ -1495,12 +1495,12 @@ namespace GatherBuddy.AutoGather
                     AutoHook.SetPluginState?.Invoke(false);
                     AutoHook.SetAutoStartFishing?.Invoke(false);
                 }
-                AutoStatus = "Closing fishing before teleport...";
+                AutoStatus = "传送前结束钓鱼...";
                 QueueQuitFishingTasks();
                 return;
             }
                 
-                AutoStatus = "Teleporting...";
+                AutoStatus = "传送中...";
                 StopNavigation();
                 
                 if (!MoveToTerritory(fish.Location))
@@ -1518,7 +1518,7 @@ namespace GatherBuddy.AutoGather
                     AutoHook.SetPluginState?.Invoke(false);
                     AutoHook.SetAutoStartFishing?.Invoke(false);
                 }
-                AutoStatus = "Stopping fishing to change target...";
+                AutoStatus = "停止钓鱼以更改目标...";
                 QueueQuitFishingTasks();
                 return;
             }
@@ -1566,12 +1566,12 @@ namespace GatherBuddy.AutoGather
 
                 if (IsGathering || IsFishing)
                 {
-                    AutoStatus = "Stopping fishing to relocate to new spot...";
+                    AutoStatus = "停止钓鱼以重新定位...";
                     QueueQuitFishingTasks();
                     return;
                 }
 
-                AutoStatus = "Moving to new fishing spot...";
+                AutoStatus = "移动到新钓点...";
                 MoveToFishingSpot(newPos, newRot);
                 return;
             }
@@ -1579,7 +1579,7 @@ namespace GatherBuddy.AutoGather
             if (IsFishing)
             {
                 StopNavigation();
-                AutoStatus = "Fishing...";
+                AutoStatus = "钓鱼中...";
                 DoFishingTasks(next);
                 return;
             }
@@ -1597,12 +1597,12 @@ namespace GatherBuddy.AutoGather
                         GatherBuddy.Log.Warning("[AutoGather] Failed to dismount at fishing spot for 5+ seconds, forcing unstuck to find landable spot");
                         _fishingSpotDismountAttempts.Remove(fishingSpotData.Position);
                         _advancedUnstuck.ForceFishing();
-                        AutoStatus = "Can't land here, finding landable spot...";
+                        AutoStatus = "无法在此着陆，寻找可着陆点...";
                         return;
                     }
                     
                     EnqueueDismount();
-                    AutoStatus = "Dismounting...";
+                    AutoStatus = "下坐骑...";
                     return;
                 }
                 
@@ -1615,7 +1615,7 @@ namespace GatherBuddy.AutoGather
                 if (playerAngle != fishingSpotData.Rotation)
                 {
                     TaskManager.Enqueue(() => SetRotation(fishingSpotData.Rotation));
-                    AutoStatus = "Adjusting rotation...";
+                    AutoStatus = "调整朝向...";
                     return;
                 }
 
@@ -1631,7 +1631,7 @@ namespace GatherBuddy.AutoGather
                 }
 
                 StopNavigation();
-                AutoStatus = "Fishing...";
+                AutoStatus = "钓鱼中...";
                 DoFishingTasks(next);
                 return;
             }
@@ -1639,7 +1639,7 @@ namespace GatherBuddy.AutoGather
             if (CurrentDestination != fishingSpotData.Position)
             {
                 StopNavigation();
-                AutoStatus = "Moving to fishing spot...";
+                AutoStatus = "移动到钓点...";
                 var autoHookArmed =
                     GatherBuddy.Config.AutoGatherConfig.UseAutoHook
                     && AutoHook.Enabled
@@ -1647,7 +1647,7 @@ namespace GatherBuddy.AutoGather
 
                 if (IsGathering || IsFishing || autoHookArmed)
                 {
-                    AutoStatus = "Stopping fishing to change target...";
+                    AutoStatus = "停止钓鱼以更改目标...";
                     QueueQuitFishingTasks();
                     return;
                 }
@@ -1693,7 +1693,7 @@ namespace GatherBuddy.AutoGather
                             
                             if (distance > CloseEnoughDistance)
                             {
-                                AutoStatus = $"Rushing to umbral node {nodeId} (Weather: {currentUmbralWeather}, {distance:F0}y)...";
+                                AutoStatus = $"冲向灵风节点 {nodeId} (天气: {currentUmbralWeather}, {distance:F0}y)...";
                                 
                                 if (!Dalamud.Conditions[ConditionFlag.Mounted] && distance >= GatherBuddy.Config.AutoGatherConfig.MountUpDistance)
                                 {
@@ -1755,7 +1755,7 @@ namespace GatherBuddy.AutoGather
                 if (umbralNodes.Any())
                 {
                     allVisibleNodes = umbralNodes;
-                    AutoStatus = $"Targeting umbral nodes (Weather: {(UmbralNodes.UmbralWeatherType)currentWeather})...";
+                    AutoStatus = $"目标灵风节点 (天气: {(UmbralNodes.UmbralWeatherType)currentWeather})...";
                 }
                 else
                 {
@@ -1792,7 +1792,7 @@ namespace GatherBuddy.AutoGather
                 var closestNode = targetableNodes.First();
                 var distance = Vector3.Distance(Player.Position, closestNode.Position);
                 
-                AutoStatus = $"Moving to Diadem node ({distance:F0}y)...";
+                AutoStatus = $"移动到云海节点 ({distance:F0}y)...";
                 
                 Gatherable targetItem;
                 if (isUmbralWeather && hasUmbralItems && UmbralNodes.UmbralNodeData.Any(entry => entry.NodeId == closestNode.DataId))
@@ -1824,12 +1824,12 @@ namespace GatherBuddy.AutoGather
                 return;
             }
             
-            AutoStatus = "Searching for next Diadem node...";
+            AutoStatus = "搜索下一个云海节点...";
             
             var currentTerritoryId = Dalamud.ClientState.TerritoryType;
             if (!Functions.InTheDiadem())
             {
-                AutoStatus = "Not in Diadem, aborting...";
+                AutoStatus = "不在云海中，中止...";
                 return;
             }
             
@@ -1863,7 +1863,7 @@ namespace GatherBuddy.AutoGather
             }
             else
             {
-                AutoStatus = "No suitable Diadem nodes found, waiting...";
+                AutoStatus = "未找到合适的云海节点，等待中...";
             }
         }
 
@@ -1901,7 +1901,7 @@ namespace GatherBuddy.AutoGather
 
             if (closestTargetableNode != null)
             {
-                AutoStatus = "Moving to node...";
+                AutoStatus = "移动到节点...";
                 var targetGather = next.First(ti => 
                     (ti.Node != null && ti.Node.WorldPositions.ContainsKey(closestTargetableNode.DataId)) ||
                     (ti.FishingSpot != null && ti.FishingSpot.WorldPositions.ContainsKey(closestTargetableNode.DataId)));
@@ -1917,7 +1917,7 @@ namespace GatherBuddy.AutoGather
                 return;
             }
 
-            AutoStatus = "Moving to far node...";
+            AutoStatus = "移动到远处节点...";
 
             if (CurrentDestination != default)
             {
@@ -1951,7 +1951,7 @@ namespace GatherBuddy.AutoGather
                 // marker not yet loaded on game
                 if (pos == null || timedNode.Time.Start > GatherBuddy.Time.ServerTime.AddSeconds(-8))
                 {
-                    AutoStatus = "Waiting on flag show up";
+                    AutoStatus = "等待旗帜显示";
                     return;
                 }
 
@@ -2355,7 +2355,7 @@ namespace GatherBuddy.AutoGather
                         AutoRetainer.EnableMultiMode?.Invoke();
                         _autoRetainerMultiModeEnabled = true;
                     }
-                    AutoStatus = $"Waiting for retainers ({closestTime.Value}s remaining)...";
+                    AutoStatus = $"等待雇员 (剩余{closestTime.Value}秒)...";
                     return true;
                 }
                 else
@@ -2377,7 +2377,7 @@ namespace GatherBuddy.AutoGather
                             {
                                 if (Lifestream.IsBusy != null && Lifestream.IsBusy())
                                 {
-                                    AutoStatus = $"Waiting for character change to complete...";
+                                    AutoStatus = $"等待角色切换完成...";
                                     return true;
                                 }
                                 
@@ -2389,7 +2389,7 @@ namespace GatherBuddy.AutoGather
                                         var charName = parts[0];
                                         var worldName = parts[1];
                                         
-                                        AutoStatus = $"Relogging to {charName}@{worldName}...";
+                                        AutoStatus = $"重新登录到 {charName}@{worldName}...";
                                         
                                         var errorCode = Lifestream.ChangeCharacter(charName, worldName);
                                         if (errorCode == 0)
@@ -2418,7 +2418,7 @@ namespace GatherBuddy.AutoGather
                             {
                                 if (!Player.Available || !Player.Interactable)
                                 {
-                                    AutoStatus = "Waiting for player to be ready...";
+                                    AutoStatus = "等待玩家准备就绪...";
                                     return true;
                                 }
                                 

@@ -81,7 +81,7 @@ public partial class Interface
     {
         ImGuiUtil.DrawTableColumn(n.Id.ToString());
         ImGuiUtil.DrawTableColumn(n.Name);
-        ImGuiUtil.DrawTableColumn(n.GatheringType.ToString());
+        ImGuiUtil.DrawTableColumn(n.GatheringType.ToName());
         ImGuiUtil.DrawTableColumn(n.Level.ToString());
         ImGuiUtil.DrawTableColumn(n.NodeType.ToString());
         ImGuiUtil.DrawTableColumn($"{n.Territory.Name} ({n.Territory.Id})");

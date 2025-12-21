@@ -53,19 +53,19 @@ public partial class Interface
             }
         }
 
-        private static readonly ContentIdHeader  _contentIdHeader  = new() { Label = "Content ID" };
-        private static readonly BaitHeader       _baitHeader       = new() { Label = "Bait" };
-        private static readonly SpotHeader       _spotHeader       = new() { Label = "Fishing Spot" };
-        private static readonly CatchHeader      _catchHeader      = new() { Label = "Caught Fish" };
-        private static readonly CastStartHeader  _castStartHeader  = new() { Label = "TimeStamp" };
-        private static readonly BiteTypeHeader   _biteTypeHeader   = new() { Label = "Tug" };
-        private static readonly HookHeader       _hookHeader       = new() { Label = "Hookset" };
-        private static readonly DurationHeader   _durationHeader   = new() { Label = "Bite" };
-        private static readonly GatheringHeader  _gatheringHeader  = new() { Label = "Gath." };
-        private static readonly PerceptionHeader _perceptionHeader = new() { Label = "Perc." };
-        private static readonly AmountHeader     _amountHeader     = new() { Label = "Amt" };
-        private static readonly SizeHeader       _sizeHeader       = new() { Label = "Ilm" };
-        private static readonly FlagHeader       _flagHeader       = new() { Label = "Flags" };
+        private static readonly ContentIdHeader  _contentIdHeader  = new() { Label = "内容ID" };
+        private static readonly BaitHeader       _baitHeader       = new() { Label = "鱼饵" };
+        private static readonly SpotHeader       _spotHeader       = new() { Label = "钓场" };
+        private static readonly CatchHeader      _catchHeader      = new() { Label = "捕获的鱼" };
+        private static readonly CastStartHeader  _castStartHeader  = new() { Label = "时间戳" };
+        private static readonly BiteTypeHeader   _biteTypeHeader   = new() { Label = "提竿" };
+        private static readonly HookHeader       _hookHeader       = new() { Label = "提钩" };
+        private static readonly DurationHeader   _durationHeader   = new() { Label = "咬钩" };
+        private static readonly GatheringHeader  _gatheringHeader  = new() { Label = "获得力" };
+        private static readonly PerceptionHeader _perceptionHeader = new() { Label = "感知力" };
+        private static readonly AmountHeader     _amountHeader     = new() { Label = "数量" };
+        private static readonly SizeHeader       _sizeHeader       = new() { Label = "寸" };
+        private static readonly FlagHeader       _flagHeader       = new() { Label = "标记" };
 
         private sealed class GatheringHeader : ColumnString<FishRecord>
         {
@@ -634,7 +634,7 @@ public partial class Interface
         else
             ImGuiUtil.DrawTextButton($"{_recordTable.CurrentItems}", textSize, ImGui.GetColorU32(ImGuiCol.Button));
         ImGui.SameLine();
-        if (ImUtf8.Button("Cleanup"u8))
+        if (ImUtf8.Button("清理"u8))
         {
             _plugin.FishRecorder.RemoveDuplicates();
             _plugin.FishRecorder.RemoveInvalid();
@@ -648,7 +648,7 @@ public partial class Interface
         ImGui.SameLine();
         try
         {
-            if (ImUtf8.Button("Copy to Clipboard"u8))
+            if (ImUtf8.Button("复制到剪贴板"u8))
                 ImGui.SetClipboardText(_plugin.FishRecorder.ExportBase64());
             ImUtf8.HoverTooltip("Export all fish records to your clipboard, to share them with other people. This may be a lot"u8);
         }
@@ -660,7 +660,7 @@ public partial class Interface
         ImGui.SameLine();
         try
         {
-            if (ImUtf8.Button("Import from Clipboard"u8))
+            if (ImUtf8.Button("从剪贴板导入"u8))
                 _plugin.FishRecorder.ImportBase64(ImGui.GetClipboardText());
             ImUtf8.HoverTooltip("Import a set of fish records shared with you from your clipboard. Should automatically skip duplicates."u8);
         }
@@ -672,7 +672,7 @@ public partial class Interface
         ImGui.SameLine();
         try
         {
-            if (ImUtf8.Button("Export JSON"u8))
+            if (ImUtf8.Button("导出JSON"u8))
             {
                 ImGui.OpenPopup(RecordTable.FileNamePopup);
                 WriteJson = true;
@@ -688,7 +688,7 @@ public partial class Interface
         ImGui.SameLine();
         try
         {
-            if (ImUtf8.Button("Export TSV"u8))
+            if (ImUtf8.Button("导出TSV"u8))
             {
                 ImGui.OpenPopup(RecordTable.FileNamePopup);
                 WriteTsv = true;

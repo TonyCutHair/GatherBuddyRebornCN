@@ -279,9 +279,9 @@ public partial class Interface
             if (!Aetherytes.Contains('\n'))
                 Aetherytes = '\0' + Aetherytes;
             Patch = string.Intern($"Patch {Data.Patch.ToVersionString()}");
-            FishType = Data.OceanFish ? "Ocean Fish" :
-                Data.IsSpearFish      ? "Spearfishing" :
-                Data.IsBigFish        ? "Big Fish" : "Regular Fish";
+            FishType = Data.OceanFish ? "海钓鱼" :
+                Data.IsSpearFish      ? "刺鱼" :
+                Data.IsBigFish        ? "大型鱼" : "普通鱼";
 
             Time = !Data.FishRestrictions.HasFlag(FishRestrictions.Time)
                 ? "Always Up"

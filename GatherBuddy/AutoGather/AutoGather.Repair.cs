@@ -90,7 +90,7 @@ public unsafe partial class AutoGather
             return true;
         }
 
-        AutoStatus = "Repairing...";
+        AutoStatus = "修理中...";
         StopNavigation();
 
         var delay = (int)GatherBuddy.Config.AutoGatherConfig.ExecutionDelay;
@@ -157,7 +157,7 @@ public unsafe partial class AutoGather
             return true;
         }
 
-        AutoStatus = "Repairing...";
+        AutoStatus = "修理中...";
         _lastRepairTime = DateTime.Now;
         var delay = (int)GatherBuddy.Config.AutoGatherConfig.ExecutionDelay;
         

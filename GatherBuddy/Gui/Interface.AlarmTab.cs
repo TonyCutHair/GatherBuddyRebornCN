@@ -132,7 +132,7 @@ public partial class Interface
 
         public static readonly Sounds[] SoundIds = Enum.GetValues<Sounds>().Where(s => s != Sounds.Unknown).ToArray();
 
-        public static readonly string[] SoundIdNames = SoundIds.Select(s => s == Sounds.None ? "No Sound" : $"Sound {s.ToIdx()}").ToArray();
+        public static readonly string[] SoundIdNames = SoundIds.Select(s => s == Sounds.None ? "无声音" : $"声音 {s.ToIdx()}").ToArray();
 
         public readonly AlarmSelector  Selector;
         public readonly TimedItemCombo ItemCombo = new(string.Empty);
@@ -177,12 +177,12 @@ public partial class Interface
         var name = alarm.Name;
         if (ImGui.InputTextWithHint("##name", CheckUnnamed(string.Empty), ref name, 64))
             _plugin.AlarmManager.ChangeAlarmName(group, alarmIdx, name);
-        ImGuiUtil.HoverTooltip("Names are optional and can be used in the alarm message that is printed to chat.");
+        ImGuiUtil.HoverTooltip("名称是可选的，可以在打印到聊天的闹钟消息中使用。");
 
         ImGui.TableNextColumn();
         if (ImGui.Checkbox("##Enabled", ref enabled) && enabled != alarm.Enabled)
             _plugin.AlarmManager.ToggleAlarm(group, alarmIdx);
-        ImGuiUtil.HoverTooltip("Enable this Alarm.");
+        ImGuiUtil.HoverTooltip("启用此闹钟。");
 
         ImGui.TableNextColumn();
         if (_alarmCache.ItemCombo.Draw(alarm.Item.InternalLocationId - 1, out var newIdx))
@@ -202,13 +202,13 @@ public partial class Interface
 
         if (ImGui.IsItemDeactivated())
             _plugin.AlarmManager.ChangeAlarmOffset(group, alarmIdx, Math.Clamp(_alarmCache.ChangedSecondOffset, 0, RealTime.SecondsPerDay));
-        ImGuiUtil.HoverTooltip("Trigger this alarm this many seconds before the item in question is next available.");
+        ImGuiUtil.HoverTooltip("在目标物品下次可用之前多少秒触发此闹钟。");
 
         ImGui.TableNextColumn();
         var printMessage = alarm.PrintMessage;
         if (ImGui.Checkbox("##PrintMessage", ref printMessage))
             _plugin.AlarmManager.ChangeAlarmMessage(group, alarmIdx, printMessage);
-        ImGuiUtil.HoverTooltip("Print a chat message when this alarm is triggered.");
+        ImGuiUtil.HoverTooltip("触发此闹钟时打印聊天消息。");
 
         ImGui.TableNextColumn();
         var idx = alarm.SoundId.ToIdx();
@@ -218,7 +218,7 @@ public partial class Interface
             _plugin.AlarmManager.ChangeAlarmSound(group, alarmIdx, AlarmCache.SoundIds[idx]);
             AlarmManager.PreviewAlarm(AlarmCache.SoundIds[idx]);
         }
-        ImGuiUtil.HoverTooltip("Play this sound effect when this alarm is triggered.");
+        ImGuiUtil.HoverTooltip("触发此闹钟时播放此音效。");
 
         ImGui.TableNextColumn();
         if (DrawLocationInput(alarm.Item, alarm.PreferLocation, out var newLocation))
@@ -231,7 +231,7 @@ public partial class Interface
         if (time.Start > now)
             ImGuiUtil.DrawTextButton(TimeInterval.DurationString(time.Start, now, false), size, ColorId.WarningBg.Value());
         else
-            ImGuiUtil.DrawTextButton("Currently Triggered", size, ColorId.ChangedLocationBg.Value());
+            ImGuiUtil.DrawTextButton("当前已触发", size, ColorId.ChangedLocationBg.Value());
     }
 
     private void DrawGroupData(AlarmGroup group, int idx)
@@ -335,7 +335,7 @@ public partial class Interface
             }
         }
 
-        if (ImGuiUtil.DrawDisabledButton("Create Preset", Vector2.Zero, "Create a new Gather Window Preset from this alarm group.",
+        if (ImGuiUtil.DrawDisabledButton("创建预设", Vector2.Zero, "从此闹钟组创建新的采集窗口预设。",
                 _alarmCache.Selector.Current == null))
         {
             var preset = new GatherWindowPreset(_alarmCache.Selector.Current!);
@@ -352,8 +352,8 @@ public partial class Interface
     {
         using var id  = ImRaii.PushId("Alarms");
         using var tab = ImRaii.TabItem(Label("Alarms", "闹钟"));
-        ImGuiUtil.HoverTooltip("Do you often find yourself late for a very important date with no time to say hello or goodbye?\n"
-          + "Set up your very own alarm clock. Viera might even be able to wear it around their neck.");
+        ImGuiUtil.HoverTooltip("你是否经常发现自己赶一个非常重要的约会迟到，没有时间打招呼或告别？\n"
+          + "设置你自己的闹钟。维埃拉族甚至可能把它挂在脖子上。");
         if (!tab)
             return;
 

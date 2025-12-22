@@ -2,7 +2,7 @@
   "Author": "The Combat Reborn Team",
   "Name": "GatherBuddy Reborn",
   "InternalName": "GatherbuddyReborn",
-  "AssemblyVersion": "7.4.0.2",
+  "AssemblyVersion": "7.4.0.3",
   "RepoUrl": "https://github.com/FFXIV-CombatReborn/GatherBuddyReborn",
   "Description": "通过物品名称查找采集点和鱼类及其位置，提供界面来追踪特殊出现时间和天气条件。还可以根据指定列表的条件自动采集物品。自动采集需要 vnavmesh。",
   "ApplicableVersion": "any",

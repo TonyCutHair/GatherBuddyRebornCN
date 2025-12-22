@@ -541,7 +541,7 @@ namespace GatherBuddy.Gui
                 if (ImGuiUtil.Checkbox(Label("Legendary", "传说"), "", preset.NodeType.Legendary, x => preset.NodeType.Legendary = x))
                     selector.Save();
                 ImGui.SameLine();
-                if (ImGuiUtil.Checkbox(Label("Ephemeral", "幻纹"), "", preset.NodeType.Ephemeral, x => preset.NodeType.Ephemeral = x))
+                if (ImGuiUtil.Checkbox(Label("Ephemeral", "涌现"), "", preset.NodeType.Ephemeral, x => preset.NodeType.Ephemeral = x))
                     selector.Save();
 
                 ImGui.Text(Label("Item types:", "物品类型:"));

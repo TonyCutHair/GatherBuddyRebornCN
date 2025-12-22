@@ -256,7 +256,7 @@ public partial class Interface
                 {
                     NodeType.Regular   => "普通",
                     NodeType.Unspoiled => "限时",
-                    NodeType.Ephemeral => "幻纹",
+                    NodeType.Ephemeral => "涌现",
                     NodeType.Legendary => "传说",
                     _                  => "未知",
                 });

@@ -252,7 +252,14 @@ public partial class Interface
                 => SetFlagsAndNames(ItemFilter.Regular, ItemFilter.Unspoiled, ItemFilter.Ephemeral, ItemFilter.Legendary);
 
             public override void DrawColumn(ExtendedGatherable item, int _)
-                => ImGui.Text(item.Data.NodeType.ToString());
+                => ImGui.Text(item.Data.NodeType switch
+                {
+                    NodeType.Regular   => "普通",
+                    NodeType.Unspoiled => "限时",
+                    NodeType.Ephemeral => "幻纹",
+                    NodeType.Legendary => "传说",
+                    _                  => "未知",
+                });
 
             public override int Compare(ExtendedGatherable lhs, ExtendedGatherable rhs)
                 => lhs.Data.NodeType.CompareTo(rhs.Data.NodeType);

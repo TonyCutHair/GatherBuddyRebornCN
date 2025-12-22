@@ -353,7 +353,7 @@ public partial class Interface
         using var id  = ImRaii.PushId("Alarms");
         using var tab = ImRaii.TabItem(Label("Alarms", "闹钟"));
         ImGuiUtil.HoverTooltip("你是否经常发现自己赶一个非常重要的约会迟到，没有时间打招呼或告别？\n"
-          + "设置你自己的闹钟。维埃拉族甚至可能把它挂在脖子上。");
+          + "设置你自己的闹钟。拉拉肥甚至可能把它挂在脖子上。");
         if (!tab)
             return;
 

@@ -494,7 +494,7 @@ namespace GatherBuddy.Gui
                 ImGui.SameLine();
                 if (ImGui.RadioButton("glv", useGlv))
                     useGlv = true;
-                ImGuiUtil.HoverTooltip("Gathering level (hidden stat). Use it to distinguish between different tiers of legendary nodes.");
+                ImGuiUtil.HoverTooltip("采集等级（隐藏属性）。使用它来区分传说节点的不同等级。");
                 if (useGlv != preset.ItemLevel.UseGlv)
                 {
                     if (useGlv)

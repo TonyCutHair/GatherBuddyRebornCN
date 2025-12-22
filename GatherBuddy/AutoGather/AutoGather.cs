@@ -554,7 +554,7 @@ namespace GatherBuddy.AutoGather
                 catch (NoCollectableActionsException)
                 {
                     Communicator.PrintError(
-                        "Unable to pick a collectability increasing action to use. Make sure that at least one of the collectable actions is enabled.");
+                        "无法选择收藏品增加力的动作。确保至少启用了一个收藏品动作。");
                     AbortAutoGather();
                 }
 
@@ -2080,7 +2080,7 @@ namespace GatherBuddy.AutoGather
             };
             if (level < Actions.Collect.MinLevel)
             {
-                Communicator.PrintError("You've put a collectable on the gathering list, but your level is not high enough to gather it.");
+                Communicator.PrintError("你在采集列表中放置了收藏品，但你的等级不足以采集它。");
                 return false;
             }
 
@@ -2093,7 +2093,7 @@ namespace GatherBuddy.AutoGather
 
             if (questId != 0 && !QuestManager.IsQuestComplete(questId))
             {
-                Communicator.PrintError("You've put a collectable on the gathering list, but you haven't unlocked the collectables.");
+                Communicator.PrintError("你在采集列表中放置了收藏品，但你还没有解锁收藏品。");
                 var sheet      = Dalamud.GameData.GetExcelSheet<Lumina.Excel.Sheets.Quest>()!;
                 var row        = sheet.GetRow(questId)!;
                 var loc        = row.IssuerLocation.Value!;
@@ -2101,7 +2101,7 @@ namespace GatherBuddy.AutoGather
                 var pos        = MapUtil.WorldToMap(new Vector2(loc.X, loc.Z), map);
                 var mapPayload = new MapLinkPayload(loc.Territory.RowId, loc.Map.RowId, pos.X, pos.Y);
                 var text       = new SeStringBuilder();
-                text.AddText("Collectables are unlocked by ")
+                text.AddText("收藏品通过以下方式解锁：")
                     .AddUiForeground(0x0225)
                     .AddUiGlow(0x0226)
                     .AddQuestLink(questId)

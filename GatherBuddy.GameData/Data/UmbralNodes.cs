@@ -38,10 +38,10 @@ public static class UmbralNodes
 
     public static readonly Dictionary<CloudedNodeType, string> NodeNames = new()
     {
-        { CloudedNodeType.CloudedRockyOutcrop, "Clouded Rocky Outcrop" },
-        { CloudedNodeType.CloudedMineralDeposit, "Clouded Mineral Deposit" },
-        { CloudedNodeType.CloudedMatureTree, "Clouded Mature Tree" },
-        { CloudedNodeType.CloudedLushVegetation, "Clouded Lush Vegetation" },
+        { CloudedNodeType.CloudedRockyOutcrop, "笼罩的岩石矿脉" },
+        { CloudedNodeType.CloudedMineralDeposit, "笼罩的矿脉" },
+        { CloudedNodeType.CloudedMatureTree, "笼罩的老树" },
+        { CloudedNodeType.CloudedLushVegetation, "笼罩的繁茂草地" },
     };
 
     public static GatheringType GetGatheringType(CloudedNodeType nodeType)

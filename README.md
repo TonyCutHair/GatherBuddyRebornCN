@@ -21,7 +21,7 @@ GatherBuddyReborn 是社区制作的最终幻想XIV原版 GatherBuddy 插件的�
 - **跳过 DevPlugins 部分，滚动到 Custom Plugin Repositories 部分**
 - 将仓库链接复制粘贴到第一个空白文本输入框中
 ```
-https://raw.githubusercontent.com/TonyCutHair/GatherBuddyRebornCN/main/repo.json
+https://raw.githubusercontent.com/TonyCutHair/DalamudPlugins/main/pluginmaster.json
 ```
 - 点击 + 按钮，确保之后新字段旁边的复选标记已设置
 - **点击右下角的保存图标**

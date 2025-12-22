@@ -3,7 +3,7 @@
     "Author": "The Combat Reborn Team",
     "Name": "GatherBuddy Reborn",
     "InternalName": "GatherbuddyReborn",
-    "AssemblyVersion": "7.4.0.2",
+    "AssemblyVersion": "7.4.0.3",
     "Description": "通过物品名称查找采集点和鱼类及其位置，提供界面来追踪特殊出现时间和天气条件。还可以根据指定列表的条件自动采集物品。自动采集需要 vnavmesh。",
     "ApplicableVersion": "any",
     "RepoUrl": "https://github.com/TonyCutHair/GatherBuddyRebornCN",
@@ -29,9 +29,9 @@
       "Utility"
     ],
     "IconUrl": "https://raw.githubusercontent.com/FFXIV-CombatReborn/RebornAssets/main/IconAssets/GBR_Icon.png",
-    "DownloadLinkInstall": "https://github.com/TonyCutHair/GatherBuddyRebornCN/releases/download/7.4.0.2/GatherbuddyReborn.zip",
-    "DownloadLinkTesting": "https://github.com/TonyCutHair/GatherBuddyRebornCN/releases/download/7.4.0.2/GatherbuddyReborn.zip",
-    "DownloadLinkUpdate": "https://github.com/TonyCutHair/GatherBuddyRebornCN/releases/download/7.4.0.2/GatherbuddyReborn.zip",
+    "DownloadLinkInstall": "https://github.com/TonyCutHair/GatherBuddyRebornCN/releases/download/7.4.0.3/GatherBuddyReborn.zip",
+    "DownloadLinkTesting": "https://github.com/TonyCutHair/GatherBuddyRebornCN/releases/download/7.4.0.3/GatherBuddyReborn.zip",
+    "DownloadLinkUpdate": "https://github.com/TonyCutHair/GatherBuddyRebornCN/releases/download/7.4.0.3/GatherBuddyReborn.zip",
     "DownloadCount": 0,
     "LastUpdate": 1734825600
   }

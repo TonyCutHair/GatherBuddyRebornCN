@@ -378,7 +378,7 @@ public class GatherWindow : Window
             _plugin.Interface.Toggle();
         }
         color.Pop();
-        ImGuiUtil.HoverTooltip("Click to enable/disable auto-gather. Right click to toggle interface");
+        ImGuiUtil.HoverTooltip("点击开启/关闭自动采集，右键切换界面");
         using var table = ImRaii.Table("##table", GatherBuddy.Config.ShowGatherWindowTimers ? 2 : 1);
         if (!table)
             return;

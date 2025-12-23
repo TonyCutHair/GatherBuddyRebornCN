@@ -178,11 +178,11 @@ public partial class Interface
                     {
                         if (ImGui.Selectable($"{kvp.Value}##{kvp.Key}"))
                         {
-                            Communicator.Print($"Importing '{kvp.Value}' from Artisan...");
+                            Communicator.Print($"正在从 Artisan 导入 '{kvp.Value}'...");
                             GatherBuddy.AutoGather.ArtisanExporter.StartArtisanImport(kvp);
                         }
 
-                        ImGuiUtil.HoverTooltip($"{kvp.Value} ({kvp.Key})\n(Click to import to new auto-gather list)");
+                        ImGuiUtil.HoverTooltip($"{kvp.Value} ({kvp.Key})\n(点击导入为新的自动采集列表)");
                     }
                 }
 
@@ -249,21 +249,21 @@ public partial class Interface
                 }
                 catch (Exception e)
                 {
-                    Communicator.PrintClipboardMessage("Error importing auto-gather list", e.ToString());
+                    Communicator.PrintClipboardMessage("导入自动采集列表出错", e.ToString());
                 }
             }
         }
 
         ImGui.SetCursorPosX(ImGui.GetWindowSize().X - 50);
-        string agHelpText =
-            "If the config option to sort by location is not selected, items are gathered in order of enabled list, then order of item in list.\n"
-          + "You can drag and draw lists to move them.\n"
-          + "You can drag and draw items in a specific list to move them.\n"
-          + "You can drag and draw an item onto a different list from the selector to add it to that list and remove it from the current.\n"
-          + "In the Gather Window, you can hold Control and Right-Click an item to delete it from the list it comes from.";
+                string agHelpText =
+                        "如果未选择按地点排序，则采集顺序为：启用的列表顺序，其次列表内物品顺序。\n"
+                    + "列表可拖拽调整顺序。\n"
+                    + "列表内的物品可拖拽调整顺序。\n"
+                    + "可将物品拖到左侧选择器中的其他列表上以移动（添加到目标并从当前移除）。\n"
+                    + "在采集窗口按住 Ctrl 并右键点击物品，可将其从所在列表删除。";
 
         ImGuiEx.InfoMarker(agHelpText,                    null, FontAwesomeIcon.InfoCircle.ToIconString(), false);
-        ImGuiEx.InfoMarker("Auto-Gather Support Discord", null, FontAwesomeIcon.Comments.ToIconString(),   false);
+        ImGuiEx.InfoMarker("自动采集支持 Discord", null, FontAwesomeIcon.Comments.ToIconString(),   false);
         if (ImGuiEx.HoveredAndClicked())
         {
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
@@ -314,7 +314,7 @@ public partial class Interface
             var       item  = list.Items[i];
             using var id    = ImRaii.PushId((int)item.ItemId);
             using var group = ImRaii.Group();
-            if (ImGuiUtil.DrawDisabledButton(FontAwesomeIcon.Trash.ToIconString(), IconButtonSize, "Delete this item from the list", false,
+            if (ImGuiUtil.DrawDisabledButton(FontAwesomeIcon.Trash.ToIconString(), IconButtonSize, "从列表删除此物品", false,
                     true))
                 deleteIndex = i;
             ImGui.SameLine();
@@ -373,7 +373,7 @@ public partial class Interface
         if (changeIndex >= 0)
             _plugin.AutoGatherListsManager.ChangeItem(list, gatherables[changeItemIndex], changeIndex);
 
-        if (ImGuiUtil.DrawDisabledButton(FontAwesomeIcon.Plus.ToIconString(), IconButtonSize, "Add this item at the end of the list", false,
+        if (ImGuiUtil.DrawDisabledButton(FontAwesomeIcon.Plus.ToIconString(), IconButtonSize, "在列表末尾添加此物品", false,
                 true))
             _plugin.AutoGatherListsManager.AddItem(list, gatherables[_autoGatherListsCache.NewGatherableIdx]);
 

@@ -56,6 +56,7 @@ public partial class Interface
             SubscribeRightClickLeaf(ExportListContext, 400);
             SubscribeRightClickFolder(CreateFolderContext, 500);
             SubscribeRightClickFolder(DeleteFolderContext, 600);
+            AddButton(DeleteSelectedButton, 900);
             UnsubscribeRightClickLeaf(RenameLeaf);
         }
 
@@ -90,7 +91,7 @@ public partial class Interface
         private void AddListButton(Vector2 size)
         {
             const string newListName = "newListName";
-            if (ImGuiUtil.DrawDisabledButton(FontAwesomeIcon.Plus.ToIconString(), size, "Create a new auto-gather list.", false, true))
+            if (ImGuiUtil.DrawDisabledButton(FontAwesomeIcon.Plus.ToIconString(), size, "创建新的自动采集列表。", false, true))
                 ImGui.OpenPopup(newListName);
 
             string name = string.Empty;
@@ -104,7 +105,7 @@ public partial class Interface
         private void ImportFromClipboardButton(Vector2 size)
         {
             const string importName = "importListName";
-            if (ImGuiUtil.DrawDisabledButton(FontAwesomeIcon.Clipboard.ToIconString(), size, "Import an auto-gather list from clipboard.", false, true))
+            if (ImGuiUtil.DrawDisabledButton(FontAwesomeIcon.Clipboard.ToIconString(), size, "从剪贴板导入自动采集列表。", false, true))
                 ImGui.OpenPopup(importName);
 
             string name = string.Empty;
@@ -122,25 +123,25 @@ public partial class Interface
 
         private void MoveUpContext(FileSystem<AutoGatherList>.Leaf leaf)
         {
-            if (ImGui.MenuItem("Move Up"))
+            if (ImGui.MenuItem("上移"))
                 _plugin.AutoGatherListsManager.MoveListUp(leaf.Value);
         }
 
         private void MoveDownContext(FileSystem<AutoGatherList>.Leaf leaf)
         {
-            if (ImGui.MenuItem("Move Down"))
+            if (ImGui.MenuItem("下移"))
                 _plugin.AutoGatherListsManager.MoveListDown(leaf.Value);
         }
 
         private void DeleteListContext(FileSystem<AutoGatherList>.Leaf leaf)
         {
-            if (ImGui.MenuItem("Delete List"))
+            if (ImGui.MenuItem("删除列表"))
                 _plugin.AutoGatherListsManager.DeleteList(leaf.Value);
         }
 
         private void DuplicateListContext(FileSystem<AutoGatherList>.Leaf leaf)
         {
-            if (ImGui.MenuItem("Duplicate List"))
+            if (ImGui.MenuItem("复制列表"))
             {
                 var clone = leaf.Value.Clone();
                 clone.Name = $"{leaf.Value.Name} (Copy)";
@@ -151,24 +152,24 @@ public partial class Interface
         private void ToggleListContext(FileSystem<AutoGatherList>.Leaf leaf)
         {
             var list = leaf.Value;
-            if (ImGui.MenuItem(list.Enabled ? "Disable" : "Enable"))
+            if (ImGui.MenuItem(list.Enabled ? "禁用" : "启用"))
                 _plugin.AutoGatherListsManager.ToggleList(list);
         }
 
         private void ExportListContext(FileSystem<AutoGatherList>.Leaf leaf)
         {
-            if (ImGui.MenuItem("Export to Clipboard"))
+            if (ImGui.MenuItem("导出到剪贴板"))
             {
                 try
                 {
                     var config = new AutoGatherList.Config(leaf.Value);
                     var base64 = config.ToBase64();
                     ImGui.SetClipboardText(base64);
-                    Communicator.PrintClipboardMessage("Auto-gather list", leaf.Value.Name);
+                    Communicator.PrintClipboardMessage("自动采集列表", leaf.Value.Name);
                 }
                 catch (Exception e)
                 {
-                    Communicator.PrintClipboardMessage("Auto-gather list", leaf.Value.Name, e);
+                    Communicator.PrintClipboardMessage("自动采集列表", leaf.Value.Name, e);
                 }
             }
         }
@@ -176,7 +177,7 @@ public partial class Interface
         private void CreateFolderContext(FileSystem<AutoGatherList>.Folder folder)
         {
             const string newFolderName = "newFolderName";
-            if (ImGui.MenuItem("Create Subfolder"))
+            if (ImGui.MenuItem("创建子文件夹"))
                 ImGui.OpenPopup(newFolderName);
 
             string name = string.Empty;
@@ -191,10 +192,22 @@ public partial class Interface
             if (folder.IsRoot)
                 return;
 
-            if (ImGui.MenuItem("Delete Folder"))
+            if (ImGui.MenuItem("删除文件夹"))
             {
                 _plugin.AutoGatherListsManager.DeleteFolder(folder);
             }
+        }
+
+        private void DeleteSelectedButton(Vector2 size)
+        {
+            var selected = Selected;
+            var disabled = selected == null || !ImGui.GetIO().KeyCtrl;
+            var tooltip  = disabled
+                ? "删除当前选中的自动采集列表（需按住 Ctrl 点击）"
+                : "删除当前选中的自动采集列表（按住 Ctrl 点击确认）";
+
+            if (ImGuiUtil.DrawDisabledButton(FontAwesomeIcon.Trash.ToIconString(), size, tooltip, disabled, true))
+                _plugin.AutoGatherListsManager.DeleteList(selected!);
         }
     }
 }

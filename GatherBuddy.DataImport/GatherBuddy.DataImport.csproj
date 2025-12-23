@@ -5,6 +5,7 @@
         <TargetFramework>net10.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+      <NoWarn>$(NoWarn);MSB3277;NU1701</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
